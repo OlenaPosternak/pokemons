@@ -13,7 +13,7 @@ const router = createBrowserRouter([
     basename: "",
   },
   {
-    path: "pokedex",
+    path: "",
     element: <App />,
     children: [
       {
