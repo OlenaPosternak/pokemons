@@ -21,7 +21,7 @@ export const Header = (props, { className }) => {
       <Box>
         <AppBarUnstyled component="nav">
           <Toolbar className="toolBar">
-            <Link to="/pokedex">
+            <Link to="/">
               <img src={Logo} alt="pokemon" />
             </Link>
             <IconButton

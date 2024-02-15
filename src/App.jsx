@@ -6,7 +6,7 @@ import React from "react";
 
 function AppUnstyled({ className }) {
   const location = useLocation();
-  const isHomePage = location.pathname === "/pokedex";
+  const isHomePage = location.pathname === "/";
 
   return (
     <div

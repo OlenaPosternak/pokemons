@@ -30,12 +30,12 @@ export const NavBarMobileUnstyled = ({
       }}
     >
       <Box onClick={handleDrawerToggle} className="wrapper">
-        <Link to="/pokedex">
+        <Link to="/">
           <img src={Logo} alt="pokemon" />
         </Link>
         <List className="list">
           <Link
-            to="/pokedex"
+            to="/"
             className={`link ${currentPage === "/" ? "active" : ""}`}
           >
             Home

@@ -7,10 +7,7 @@ const NavBarUnstyled = ({ className }) => {
 
   return (
     <nav className={`${className}`}>
-      <Link
-        to="/pokedex"
-        className={`link ${currentPage === "/" ? "active" : ""}`}
-      >
+      <Link to="/" className={`link ${currentPage === "/" ? "active" : ""}`}>
         Home
       </Link>
       <Link

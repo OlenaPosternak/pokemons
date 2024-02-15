@@ -5,8 +5,8 @@ import { App } from "./App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { HomePage } from "./components/homePage/HomePage";
 
-// import { Pokemons } from './components/pokemons/Pokemons';
-// import { PokemonsLoader } from './components/pokemons/PokemonsLoader';
+import { Pokemons } from "./components/pokemons/Pokemons";
+import { PokemonsLoader } from "./components/pokemons/PokemonsLoader";
 
 const router = createBrowserRouter([
   {
@@ -22,8 +22,8 @@ const router = createBrowserRouter([
       },
       {
         path: "allpokemons",
-        // element: <Pokemons />,
-        // loader: PokemonsLoader,
+        element: <Pokemons />,
+        loader: PokemonsLoader,
       },
     ],
   },
