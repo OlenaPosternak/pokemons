@@ -31,7 +31,7 @@ export async function PokemonsLoader({ request }) {
   } else {
     try {
       const results = await axios.get(
-        `https://pokeapi.co/api/v2/pokemon/${searchValue}`
+        `https://pokeapi.co/api/v2/pokemon/${searchValue.toLocaleLowerCase()}`
       );
       pokemonList = [results.data];
     } catch (error) {

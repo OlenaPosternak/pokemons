@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { useLoaderData } from "react-router-dom";
 import { PokemonCard } from "../pokemonCard/PokemonCard";
 import { ScrollToTopButton } from "../shared/ScrollToTopButton";
-import styled from "@emotion/styled";
 import { PaginationSection } from "./PaginationSection";
 import { SearchPanel } from "../searchPanel/SearchPanel";
+import styled from "@emotion/styled";
 
 const DEFAULT_OFFSET = 0;
 
@@ -23,7 +23,7 @@ export const AllPokemonsUnstyled = ({ className }) => {
       <h2 style={{ textAlign: "center", margin: " 20px 0" }}>
         {totalNumberOfPokemons} Pokemons for you to find your favorite{" "}
       </h2>
-      <SearchPanel searchValue={searchValue} setSearchValue={setSearchValue} />
+      <SearchPanel setSearchValue={setSearchValue} />
       <div className="pokemonsList">
         {pokemonList.map((pokeData) => (
           <PokemonCard pokemonInfo={pokeData} key={pokeData.id} />

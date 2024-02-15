@@ -5,16 +5,18 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import ClearIcon from "@mui/icons-material/Clear";
 import SearchIcon from "@mui/icons-material/Search";
+import styled from "@emotion/styled";
 
-export const SearchPanel = ({ className, searchValue, setSearchValue }) => {
+export const SearchPanelUnstyled = ({ className, setSearchValue }) => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const name = searchParams.get("searchValue");
   const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
-    let params = new URLSearchParams(document.location.search);
-    let name = params.get("searchValue");
     setInputValue(name || "");
-  }, [setInputValue]);
+  }, [name]);
 
   const onSearchClick = (e) => {
     e.preventDefault();
@@ -30,18 +32,12 @@ export const SearchPanel = ({ className, searchValue, setSearchValue }) => {
 
   return (
     <div className={className}>
-      <Box
-        component="form"
-        sx={{
-          width: "100%",
-          margin: "20px auto",
-          maxWidth: 800,
-        }}
-      >
+      <Box component="form" className="form" sx={{}}>
         <Input
+          className="searchInput"
           endAdornment={
             <IconButton className="icon">
-              {!searchValue ? (
+              {!name ? (
                 <SearchIcon onClick={onSearchClick} />
               ) : (
                 <ClearIcon onClick={onClearClick} />
@@ -62,33 +58,43 @@ export const SearchPanel = ({ className, searchValue, setSearchValue }) => {
             }
           }}
           placeholder="Find a pokemon by name"
-          sx={{
-            input: {
-              position: "relative",
-              background: "#fff",
-              border: "1px solid rgba(217, 217, 217, 0.5)",
-              borderBottomColor: "rgba(217, 217, 217, 0.3)",
-              borderRadius: "8px",
-              color: "#000",
-              padding: "10px 20px",
-              width: "100%",
-              "@media only screen and (max-width: 480px)": {
-                paddingRight: "50px",
-              },
-            },
-            "& .icon": {
-              position: "absolute",
-              right: "8px",
-              top: "50%",
-              transform: "translateY(-50%)",
-            },
-
-            "input::placeholder": {
-              color: "black",
-            },
-          }}
         />
       </Box>
     </div>
   );
 };
+
+const styles = {
+  ".form": {
+    width: "100%",
+    margin: "20px auto",
+    maxWidth: 800,
+  },
+  ".searchInput": {
+    input: {
+      position: "relative",
+      background: "#fff",
+      border: "1px solid rgba(217, 217, 217, 0.5)",
+      borderBottomColor: "rgba(217, 217, 217, 0.3)",
+      borderRadius: "8px",
+      color: "#000",
+      padding: "10px 20px",
+      width: "100%",
+      "@media only screen and (max-width: 480px)": {
+        paddingRight: "50px",
+      },
+    },
+    "& .icon": {
+      position: "absolute",
+      right: "8px",
+      top: "50%",
+      transform: "translateY(-50%)",
+    },
+
+    "input::placeholder": {
+      color: "black",
+    },
+  },
+};
+
+export const SearchPanel = styled(SearchPanelUnstyled)(styles);
