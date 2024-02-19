@@ -6,11 +6,12 @@ import styled from "@emotion/styled";
 
 const POKEMONS_PER_PAGE = 20;
 
-export const PaginationSection = ({
+export const PaginationSectionUnstyled = ({
   offset,
   setOffset,
   quantityOfPokemons,
   DEFAULT_OFFSET,
+  className,
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -39,19 +40,10 @@ export const PaginationSection = ({
     navigate(`../allpokemons?offset=0`);
   };
   return (
-    <div
-      className="buttonsWrapper"
-      style={{
-        display: "flex",
-        margin: "20px auto",
-        justifyContent: "center",
-        gap: "15px",
-      }}
-    >
+    <div className={className}>
       <ButtonForPagination onClick={handleHome}>Home</ButtonForPagination>{" "}
       {quantityOfPokemons >= POKEMONS_PER_PAGE ? (
         <>
-          {" "}
           <ButtonForPagination
             onClick={handlePrevPage}
             disabled={offset === DEFAULT_OFFSET}
@@ -68,3 +60,12 @@ export const PaginationSection = ({
     </div>
   );
 };
+
+const styles = {
+  display: "flex",
+  margin: "20px auto",
+  justifyContent: "center",
+  gap: "15px",
+};
+
+export const PaginationSection = styled(PaginationSectionUnstyled)(styles);

@@ -7,7 +7,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import SearchIcon from "@mui/icons-material/Search";
 import styled from "@emotion/styled";
 
-export const SearchPanelUnstyled = ({ className, setSearchValue }) => {
+export const SearchPanelUnstyled = ({ className }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -20,28 +20,34 @@ export const SearchPanelUnstyled = ({ className, setSearchValue }) => {
 
   const onSearchClick = (e) => {
     e.preventDefault();
-    setSearchValue(inputValue);
-    navigate(`?searchValue=${inputValue}`);
+    if (inputValue) {
+      navigate(`search/?searchValue=${inputValue}`);
+    }
   };
 
   const onClearClick = () => {
-    setSearchValue("");
     setInputValue("");
     navigate(`/allpokemons`);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      onSearchClick(e);
+    }
+  };
+
   return (
     <div className={className}>
-      <Box component="form" className="form" sx={{}}>
+      <Box component="form" className="form">
         <Input
           className="searchInput"
           endAdornment={
-            <IconButton className="icon">
-              {!name ? (
-                <SearchIcon onClick={onSearchClick} />
-              ) : (
-                <ClearIcon onClick={onClearClick} />
-              )}
+            <IconButton
+              className="icon"
+              onClick={!name ? onSearchClick : onClearClick}
+            >
+              {!name ? <SearchIcon /> : <ClearIcon />}
             </IconButton>
           }
           disableUnderline={true}
@@ -50,13 +56,8 @@ export const SearchPanelUnstyled = ({ className, setSearchValue }) => {
           fullWidth
           name="searchValue"
           value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              e.preventDefault();
-              onSearchClick(e);
-            }
-          }}
+          onChange={(e) => setInputValue(e.target.value.trim())}
+          onKeyDown={handleKeyDown}
           placeholder="Find a pokemon by name"
         />
       </Box>
@@ -73,11 +74,10 @@ const styles = {
   ".searchInput": {
     input: {
       position: "relative",
-      background: "#fff",
-      border: "1px solid rgba(217, 217, 217, 0.5)",
-      borderBottomColor: "rgba(217, 217, 217, 0.3)",
+      background: "var(--color-white)",
+      border: "1px solid var(--color-border)",
       borderRadius: "8px",
-      color: "#000",
+      color: "var(--color-black)",
       padding: "10px 20px",
       width: "100%",
       "@media only screen and (max-width: 480px)": {
@@ -92,7 +92,7 @@ const styles = {
     },
 
     "input::placeholder": {
-      color: "black",
+      color: "var(--color-black)",
     },
   },
 };

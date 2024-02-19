@@ -45,7 +45,7 @@ export const PokemonCardUnstyled = ({ className, pokemonInfo }) => {
 };
 
 const styles = {
-  boxShadow: "4px 4px 4px 0px rgba(33, 33, 33, 0.10)",
+  boxShadow: "var(--card-shadow)",
   borderRadius: "10px",
   margin: "0 auto",
   width: "100%",

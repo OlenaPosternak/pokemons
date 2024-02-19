@@ -1,36 +1,35 @@
-import { useState, useEffect } from "react";
-import { useLoaderData } from "react-router-dom";
-import { PokemonCard } from "../pokemonCard/PokemonCard";
+import { useState, useEffect, Suspense } from "react";
+import { Outlet, useNavigation } from "react-router-dom";
 import { ScrollToTopButton } from "../shared/ScrollToTopButton";
 import { PaginationSection } from "./PaginationSection";
 import { SearchPanel } from "../searchPanel/SearchPanel";
+import { SkeletonOneCard } from "../shared/SkeletonOneCard";
 import styled from "@emotion/styled";
 
 const DEFAULT_OFFSET = 0;
 
-export const AllPokemonsUnstyled = ({ className }) => {
+export const AllPokemonsPageUnstyled = ({ className }) => {
+  const navigation = useNavigation();
   const [offset, setOffset] = useState(DEFAULT_OFFSET);
-  const [searchValue, setSearchValue] = useState("");
+  const [totalPokemons, setTotalPokemons] = useState();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [offset]);
 
-  const { totalNumberOfPokemons, pokemonList } = useLoaderData();
-
   return (
     <section className={className}>
-      <h2 style={{ textAlign: "center", margin: " 20px 0" }}>
-        {totalNumberOfPokemons} Pokemons for you to find your favorite{" "}
-      </h2>
-      <SearchPanel setSearchValue={setSearchValue} />
-      <div className="pokemonsList">
-        {pokemonList.map((pokeData) => (
-          <PokemonCard pokemonInfo={pokeData} key={pokeData.id} />
-        ))}
-      </div>
+      <h2>{totalPokemons} Pokemons for you to find your favorite</h2>
+      <SearchPanel />
+
+      {navigation.state === "loading" ? (
+        <SkeletonOneCard />
+      ) : (
+        <Outlet context={setTotalPokemons} />
+      )}
+
       <PaginationSection
-        quantityOfPokemons={pokemonList.length}
+        quantityOfPokemons={totalPokemons}
         setOffset={setOffset}
         offset={offset}
         DEFAULT_OFFSET={DEFAULT_OFFSET}
@@ -41,6 +40,10 @@ export const AllPokemonsUnstyled = ({ className }) => {
 };
 
 const styles = {
+  h2: {
+    textAlign: "center",
+    margin: " 20px 0",
+  },
   ".pokemonsList": {
     display: "grid",
     gridTemplateColumns: "repeat(2, 1fr)",
@@ -53,4 +56,4 @@ const styles = {
   },
 };
 
-export const Pokemons = styled(AllPokemonsUnstyled)(styles);
+export const AllPokemonsPage = styled(AllPokemonsPageUnstyled)(styles);
