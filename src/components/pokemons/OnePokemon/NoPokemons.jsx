@@ -19,6 +19,8 @@ const styles = {
   flexDirection: "column",
   gap: "5%",
   alignItems: "center",
+  justifyContent: "center",
+  minHeight: "270px",
   p: {
     textAlign: "center",
   },
