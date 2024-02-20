@@ -2,12 +2,15 @@ import { useLoaderData, useOutletContext } from "react-router-dom";
 import { PokemonCard } from "../../pokemonCard/PokemonCard";
 
 import styled from "@emotion/styled";
+import { useEffect } from "react";
 
 const PokemonsListUnstyled = ({ className }) => {
   const { pokemonList, totalNumberOfPokemons } = useLoaderData();
   const setTotalPokemons = useOutletContext();
-  setTotalPokemons(totalNumberOfPokemons);
 
+  useEffect(() => {
+    setTotalPokemons(totalNumberOfPokemons);
+  }, []);
   return (
     <section className={className}>
       <div className="pokemonsList">
@@ -32,6 +35,15 @@ const styles = {
     "@media screen and (max-width: 750px)": {
       display: "grid",
       gridTemplateColumns: "repeat(1, 1fr)",
+    },
+  },
+
+  "@keyframes fadeIn": {
+    from: {
+      opacity: 0,
+    },
+    to: {
+      opacity: 1,
     },
   },
 };

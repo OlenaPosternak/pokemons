@@ -59,15 +59,6 @@ const styles = {
     animation: "progressAnimationStrike 2s",
   },
 
-  "@keyframes fadeIn": {
-    from: {
-      opacity: 0,
-    },
-    to: {
-      opacity: 1,
-    },
-  },
-
   "@keyframes progressAnimationStrike": {
     from: { width: 0 },
     to: { width: "100%" },
