@@ -9,6 +9,8 @@ import { PokemonsList } from "./components/pokemons/PokemonsList/PokemonsList";
 import { PokemonsLoader } from "./components/pokemons/PokemonsList/PokemonsLoader";
 import { OnePokemonSmall } from "./components/pokemons/OnePokemon/OnePokemonSmall";
 import { OnePokemonLoader } from "./components/pokemons/OnePokemon/OnePokemonLoader";
+import { HelmetProvider } from "react-helmet-async";
+import { PokemonPage } from "./components/pokemonPage/PokemonPage";
 
 const router = createBrowserRouter([
   {
@@ -38,13 +40,21 @@ const router = createBrowserRouter([
           },
         ],
       },
+      {
+        path: "allpokemons/:pokemonId",
+        element: <PokemonPage />,
+      },
     ],
   },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+const helmetContext = {};
+
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <HelmetProvider context={helmetContext}>
+      <RouterProvider router={router} />
+    </HelmetProvider>
   </React.StrictMode>
 );

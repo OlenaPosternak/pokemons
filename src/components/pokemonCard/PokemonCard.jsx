@@ -7,40 +7,45 @@ import { toCapitalizedFirstLetter } from "../../helpers/capitalizedFirstLetter";
 import { getPokemonImageByName } from "../../helpers/getPokemonImageByName";
 import styled from "@emotion/styled";
 import { useRandomColorHook } from "../../hooks/useRandomColorHook";
+import { Link } from "react-router-dom";
 
 export const PokemonCardUnstyled = ({ className, pokemonInfo }) => {
   const randomBackground = useRandomColorHook();
 
   return (
-    <Card className={className}>
-      <CardActionArea className="cardActionArea">
-        <CardMedia
-          className="pokemonImg"
-          component="img"
-          image={getPokemonImageByName(pokemonInfo.name)}
-          alt="picture of pokemon"
-        />
-        <CardContent
-          className="cardContent"
-          sx={{ background: randomBackground }}
-        >
-          <Typography>{toCapitalizedFirstLetter(pokemonInfo.name)}</Typography>
-          <div>
-            <Typography className="pokemonWeight">
-              {pokemonInfo.weight}
+    <Link to={`${pokemonInfo.id}`} className={className}>
+      <Card className={className}>
+        <CardActionArea className="cardActionArea">
+          <CardMedia
+            className="pokemonImg"
+            component="img"
+            image={getPokemonImageByName(pokemonInfo.name)}
+            alt="picture of pokemon"
+          />
+          <CardContent
+            className="cardContent"
+            sx={{ background: randomBackground }}
+          >
+            <Typography>
+              {toCapitalizedFirstLetter(pokemonInfo.name)}
             </Typography>
-            <Typography className="weightSize">Weight</Typography>
-          </div>
-          <ul className="typeInfo">
-            {pokemonInfo.types.map((type) => (
-              <li key={type.type.name} className="typeItem">
-                {toCapitalizedFirstLetter(type.type.name)}
-              </li>
-            ))}
-          </ul>
-        </CardContent>
-      </CardActionArea>
-    </Card>
+            <div>
+              <Typography className="pokemonWeight">
+                {pokemonInfo.weight}
+              </Typography>
+              <Typography className="weightSize">Weight</Typography>
+            </div>
+            <ul className="typeInfo">
+              {pokemonInfo.types.map((type) => (
+                <li key={type.type.name} className="typeItem">
+                  {toCapitalizedFirstLetter(type.type.name)}
+                </li>
+              ))}
+            </ul>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+    </Link>
   );
 };
 

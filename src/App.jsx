@@ -1,29 +1,37 @@
 import { Outlet, useLocation } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { Header } from "./components/header/Header";
 import { Footer } from "./components/shared/Footer";
 import styled from "@emotion/styled";
 
+const SITE_LINK = "https://yourpokemons.netlify.app/";
 function AppUnstyled({ className }) {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
 
   return (
-    <div
-      style={{
-        background: isHomePage ? "var(--background-color-yellow)" : "none",
-      }}
-    >
+    <>
+      <Helmet>
+        <title>Find all your favorite Pokemon</title>
+        <link rel="canonical" href={SITE_LINK} />
+      </Helmet>
       <div
-        className={className}
-        style={{ opacity: 0, animation: "fadeIn 2s ease forwards" }}
+        style={{
+          background: isHomePage ? "var(--background-color-yellow)" : "none",
+        }}
       >
-        <Header />
-        <div className="app">
-          <Outlet />
+        <div
+          className={className}
+          style={{ opacity: 0, animation: "fadeIn 2s ease forwards" }}
+        >
+          <Header />
+          <div className="app">
+            <Outlet />
+          </div>
+          <Footer />
         </div>
-        <Footer />
       </div>
-    </div>
+    </>
   );
 }
 
