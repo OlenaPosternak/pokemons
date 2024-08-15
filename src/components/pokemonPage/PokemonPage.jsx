@@ -13,6 +13,8 @@ export const PokemonPage = ({}) => {
           property="og:url"
           content="https://yourpokemons.netlify.app/allpokemons/1"
         />
+        <meta property="og:image" content="../../images/pokemon.png" />
+        <meta property="og:type" content="website" />
       </Helmet>
       <p>Cooming Soon</p>
     </>
