@@ -22,7 +22,11 @@ function AppUnstyled({ className }) {
       >
         <div
           className={className}
-          style={{ opacity: 0, animation: "fadeIn 2s ease forwards" }}
+          style={{
+            opacity: 0,
+            animation: "fadeIn 2s ease forwards",
+            WebkitAnimation: "fadeIn 2s ease forwards",
+          }}
         >
           <Header />
           <div className="app">
@@ -53,6 +57,11 @@ const styles = () => ({
   ".app": {
     flex: 1,
     marginTop: "95px",
+  },
+
+  ".fade-in": {
+    opacity: 0,
+    animation: "fadeIn 2s ease forwards",
   },
 });
 
