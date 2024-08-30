@@ -21,12 +21,7 @@ function AppUnstyled({ className }) {
         }}
       >
         <div
-          className={className}
-          style={{
-            opacity: 0,
-            animation: "fadeIn 2s ease forwards",
-            WebkitAnimation: "fadeIn 2s ease forwards",
-          }}
+          className={`${isHomePage ? "home-page-cursor" : ""} ${className} `}
         >
           <Header />
           <div className="app">
@@ -45,6 +40,9 @@ const styles = () => ({
   width: "100vw",
   minHeight: "100vh",
   padding: "0 156px  30px ",
+  opacity: 0,
+  animation: "fadeIn 2s ease forwards",
+  WebkitAnimation: "fadeIn 2s ease forwards",
 
   "@media screen and (max-width: 1280px)": {
     padding: "0 30px  15px ",
@@ -57,11 +55,6 @@ const styles = () => ({
   ".app": {
     flex: 1,
     marginTop: "95px",
-  },
-
-  ".fade-in": {
-    opacity: 0,
-    animation: "fadeIn 2s ease forwards",
   },
 });
 

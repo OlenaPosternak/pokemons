@@ -15,7 +15,7 @@ const images = {
   },
 };
 
-export const HeroPictureUnstyled = ({ className }) => {
+const HeroPictureUnstyled = ({ className }) => {
   const { mobile, pc } = images;
 
   return (
